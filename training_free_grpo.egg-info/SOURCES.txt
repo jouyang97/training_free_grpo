@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+tests/test_trainer.py
+training_free_grpo/__init__.py
+training_free_grpo/example.py
+training_free_grpo/memory.py
+training_free_grpo/openai_backend.py
+training_free_grpo/reward.py
+training_free_grpo/trainer.py
+training_free_grpo/types.py
+training_free_grpo.egg-info/PKG-INFO
+training_free_grpo.egg-info/SOURCES.txt
+training_free_grpo.egg-info/dependency_links.txt
+training_free_grpo.egg-info/requires.txt
+training_free_grpo.egg-info/top_level.txt

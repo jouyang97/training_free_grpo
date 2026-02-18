@@ -1,0 +1,56 @@
+# Training-Free GRPO (Reference Implementation)
+
+This repository contains a practical, minimal implementation of the key ideas from
+"Training-Free Group Relative Policy Optimization":
+
+- frozen policy (no model weight updates)
+- grouped rollouts per task
+- semantic reward computation
+- within-group relative advantage
+- experience distillation and memory
+- inference-time token-prior injection from memory
+
+## What this implementation is
+
+This is an engineering-oriented framework for reproducing the method structure, not
+the exact proprietary setup from the paper. It is designed so you can plug in:
+
+- your own LLM backend
+- your own task reward function
+- your own experience extraction strategy
+
+## Quickstart
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+python -m training_free_grpo.example
+pytest
+```
+
+## OpenAI Responses API backend
+
+Set your API key and run with the OpenAI backend:
+
+```bash
+export OPENAI_API_KEY="..."
+python -m training_free_grpo.example --backend openai --model gpt-5.2
+```
+
+The OpenAI backend uses the Responses API via `OpenAIResponsesBackend` in
+`training_free_grpo/openai_backend.py`.
+
+## Package layout
+
+- `training_free_grpo/types.py`: core dataclasses and backend protocol
+- `training_free_grpo/memory.py`: experience store and retrieval
+- `training_free_grpo/reward.py`: semantic reward + group-relative advantage
+- `training_free_grpo/trainer.py`: training-free GRPO loop
+- `training_free_grpo/example.py`: runnable toy demo
+- `training_free_grpo/openai_backend.py`: OpenAI Responses API backend
+
+## Notes
+
+- The framework intentionally does not force any specific LLM provider.
+- No parameter updates occur; all learning is through memory/context.
